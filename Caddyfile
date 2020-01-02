@@ -1,0 +1,15 @@
+api.{$TLD} {
+  proxy / http://api:{$API_PORT}
+
+  log stdout
+
+  request_id
+
+  gzip
+
+  header / {
+    Access-Control-Allow-Origin * # should be https://{$TLD} but is not being substituted
+    Access-Control-Allow-Methods "GET, POST, OPTIONS"
+    X-Request-Id {request_id}
+  }
+}
