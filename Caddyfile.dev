@@ -1,9 +1,15 @@
-api.{$TLD} {
+api.{$TLD}:80, api.{$TLD}:443 {
   tls self_signed
+
+  redir 301 {
+    if {scheme} not https
+    / https://{host}{uri}
+  }
 
   proxy / http://api:{$API_PORT}
 
   log stdout
+  errors stderr
 
   request_id
 

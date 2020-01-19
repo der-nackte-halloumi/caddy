@@ -2,6 +2,7 @@ api.{$TLD} {
   proxy / http://api:{$API_PORT}
 
   log stdout
+  errors stderr
 
   request_id
 

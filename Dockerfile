@@ -9,7 +9,7 @@ FROM alpine:3 as build_development
 ONBUILD COPY ./Caddyfile.dev ./Caddyfile
 
 # actual build steps
-
+ARG build_env
 FROM build_${build_env}
 
 RUN apk --no-cache add tar curl
