@@ -20,8 +20,8 @@ after_success:
   - bash scripts/docker_push.sh ${TRAVIS_BUILD_NUMBER}
 
 deploy:
-  skip_cleanup: true
+  cleanup: false
   provider: script
-    script: bash scripts/deploy.sh latest
+  script: bash scripts/deploy.sh latest
   on:
     branch: master
