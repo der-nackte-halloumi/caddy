@@ -9,4 +9,4 @@ chmod 400 der-nackte-halloumi-caddy-travis
 echo $SERVER_PUBLIC_KEY >> $HOME/.ssh/known_hosts
 
 # restart service
-ssh -i der-nackte-halloumi-caddy-travis $SERVER_ADDRESS "docker-compose up --build -d caddy"
+ssh -i der-nackte-halloumi-caddy-travis $SERVER_ADDRESS "docker-compose pull caddy && docker-compose up --build -d caddy"
