@@ -17,7 +17,7 @@ script:
   - if [ "$TRAVIS_PULL_REQUEST" = "false" ]; then docker build -t dernacktehalloumi/caddy:latest .; fi
 
 after_success:
-  - bash scripts/docker_push.sh ${TRAVIS_BUILD_NUMBER}
+  - if [ "$TRAVIS_PULL_REQUEST" = "true" ]; then bash scripts/docker_push.sh ${TRAVIS_BUILD_NUMBER} ; fi
 
 deploy:
   skip_cleanup: true
