@@ -2,11 +2,12 @@
 
 set -eo pipefail
 
-./scripts/docker_push.sh $1
+echo ">>> pushing latest image"
+./scripts/docker_push.sh latest
 
 chmod 400 der-nackte-halloumi-caddy-travis
 
 echo $SERVER_PUBLIC_KEY >> $HOME/.ssh/known_hosts
 
-# restart service
-ssh -i der-nackte-halloumi-caddy-travis $SERVER_ADDRESS "docker-compose pull caddy && docker-compose up --build -d caddy"
+echo ">>> restarting caddy with image dernacktehalloumi/caddy:$TRAVIS_BUILD_NUMBER"
+ssh -i der-nackte-halloumi-caddy-travis $SERVER_ADDRESS "CADDY_IMAGE_TAG=$TRAVIS_BUILD_NUMBER docker-compose up --build -d caddy"

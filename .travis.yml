@@ -17,12 +17,12 @@ script:
   - if [ "$TRAVIS_PULL_REQUEST" = "false" ]; then docker build -t dernacktehalloumi/caddy:latest .; fi
 
 after_success:
-  - if [ "$TRAVIS_PULL_REQUEST" = "true" ]; then bash scripts/docker_push.sh ${TRAVIS_BUILD_NUMBER} ; fi
+  - bash scripts/docker_push.sh ${TRAVIS_BUILD_NUMBER}
 
 deploy:
   skip_cleanup: true
   provider: script
-  script: bash scripts/deploy.sh latest
+  script: bash scripts/deploy.sh
   on:
     branch: master
 
