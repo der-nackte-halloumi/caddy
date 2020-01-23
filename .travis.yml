@@ -1,0 +1,27 @@
+language: minimal
+
+services:
+  - docker
+
+branches:
+  only:
+    - master
+
+before_install:
+  - openssl aes-256-cbc -K $encrypted_3da11f852f86_key -iv $encrypted_3da11f852f86_iv -in der-nackte-halloumi-caddy-travis.enc -out der-nackte-halloumi-caddy-travis -d
+
+install: skip
+
+script:
+  - docker build -t dernacktehalloumi/caddy:${TRAVIS_BUILD_NUMBER} .
+  - if [ "$TRAVIS_PULL_REQUEST" = "false" ]; then docker build -t dernacktehalloumi/caddy:latest .; fi
+
+after_success:
+  - bash scripts/docker_push.sh ${TRAVIS_BUILD_NUMBER}
+
+deploy:
+  skip_cleanup: true
+  provider: script
+    script: bash scripts/deploy.sh latest
+  on:
+    branch: master
