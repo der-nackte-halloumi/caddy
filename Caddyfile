@@ -12,5 +12,6 @@ api.{$TLD} {
     Access-Control-Allow-Origin * # should be https://{$TLD} but is not being substituted
     Access-Control-Allow-Methods "GET, POST, OPTIONS"
     X-Request-Id {request_id}
+    -Server
   }
 }
