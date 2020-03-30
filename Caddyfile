@@ -1,4 +1,4 @@
-api.{$TLD} {
+api.{$TLD}, api.{$TLD_ALT} {
   proxy / http://api:{$API_PORT}
 
   log stdout
